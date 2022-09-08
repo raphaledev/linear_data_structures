@@ -1,0 +1,41 @@
+ALGORITHM problem1_solution2
+VAR
+    htab : HASH_TABLE<INTEGER,INTEGER>;
+    set1, set2 : ARRAY_OF INTEGER[10];
+    sum, count, i,j : INTEGER:=0;
+BEGIN
+    Read(set1);
+    Read(set2);
+
+    FOR i FROM 0 TO set1.length-1 STEP 1 DO
+        IF (htab.lookup(set1[i]) = TRUE) THEN  // If the element is found
+            count := htab.get(set1[i]);        // We get its key
+            htab.insert(set1[i],count+1);      // We increment the value of count
+        ELSE
+            htab.insert(set1[i],1);
+        END_IF
+    END_FOR
+
+    FOR i FROM 0 TO set2.length-1 STEP 1 DO
+        IF (htab.lookup(set2[i]) = TRUE) THEN // Same for the second array
+            count := htab.get(set2[i]);
+            htab.insert(set2[i],count+1);     
+        ELSE
+            htab.insert(set2[i],1);
+        END_IF
+    END_FOR
+
+    FOR i FROM 0 TO set1.length-1 STEP 1  DO
+        IF (htab.get(set1[i]) <> 1) THEN      // Elements with multiple occurrences
+            sum := sum + set1[i];             // We add them to the sum
+        END_IF
+    END_FOR
+
+    FOR i FROM 0 TO set2.length-1 STEP 1  DO
+        IF (htab.get(set2[i]) <> 1) THEN     // Same for the second array
+            sum := sum + set2[i];
+        END_IF
+    END_FOR
+    
+    Write(sum);
+END

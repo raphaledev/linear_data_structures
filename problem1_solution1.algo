@@ -1,0 +1,25 @@
+ALGORITHM problem1_solution1
+VAR
+    set1, set2 : ARRAY_OF INTEGER[10];
+    sum, flag, i,j : INTEGER:=0;
+BEGIN
+    Read(set1);
+    Read(set2);
+    FOR i FROM 0 TO set1.length-1 STEP 1 DO      // Loop inside the 1st array
+        flag := 0;                               // We use a flag to check if an element is found
+        FOR j FROM 0 TO set2.length-1 STEP 1 DO  // Loop inside the 2nd array
+            IF (set1[i] = set2[j]) THEN          // If we find the same value in the 2nd array
+                set2[j] := 0                     // We change its value to 0 so it will not affect the sum
+                flag := 1                        // Element found
+            END_IF
+        END_FOR  
+        IF (flag = 0) THEN                       // Element not found
+            sum := set1[i]                       // So we can add the value to the sum
+        END_IF 
+    END_FOR
+    FOR i FROM 0 TO set2.length-1  STEP 1 DO    
+        sum := sum + set2[i];                    // All values <> 0 were not found in the first array so we can add all the values in the sum
+   
+    END_FOR 
+    Write(sum);
+END

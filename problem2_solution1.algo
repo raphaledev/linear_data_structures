@@ -1,0 +1,23 @@
+ALGORITHM problem2_solution1
+VAR
+    set1, set2 : ARRAY_OF INTEGER[10];
+    sum, i,j : INTEGER:=0;
+BEGIN
+    Read(set1);
+    Read(set2);
+    FOR i FROM 0 TO set1.length-1 STEP 1 DO     
+        FOR j FROM 0 TO set2.length-1 STEP 1 DO
+            IF (set1[i] = set2[j]) THEN        // If we find the same value
+                sum := sum + set1[i];          // We add it to the sum     
+            END_IF
+        END_FOR   
+    END_FOR
+    FOR i FROM 0 TO set2.length-1  STEP 1 DO    // Same process
+        FOR j FROM 0 TO set1.length-1 STEP 1 DO
+            IF (set2[i] = set1[j]) THEN
+                sum := sum + set2[i];
+            END_IF
+        END_FOR   
+    END_FOR 
+    Write(sum);
+END
